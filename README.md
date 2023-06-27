@@ -10,7 +10,6 @@
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
-- [Keywords](#keywords)
 
 ## Introduction
 
@@ -32,17 +31,16 @@ Install dependencies:
 
 ## Usage
 
-const password = "Securepassword5!";
-const checkGeneratePassword = checkGenerate(password);
+- const password = "Securepassword5!";
+- const checkGeneratePassword = checkGenerate(password);
 
 ## Contributing
 
-If you would like to contribute code, please fork this repository, make your changes, and then submit a pull-request.
+- If you would like to contribute code, please fork this repository, make your changes, and then submit a pull-request.
 
 ## License
 
-This project is licensed under the MIT License. See the LICENSE file for more information.
+- This project is licensed under the MIT License. See the license file for more information.
 
-## Keywords
 
-security strong password 
+
