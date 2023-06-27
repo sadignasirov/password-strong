@@ -43,3 +43,4 @@ function checkGenerate(password) {
   return "Password is strong.";
 }
 
+module.exports = checkGenerate;
