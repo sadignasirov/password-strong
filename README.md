@@ -31,8 +31,28 @@ Install dependencies:
 
 ## Usage
 
-- const password = "Securepassword5!";
-- const checkGeneratePassword = checkGenerate(password);
+```shell
+
+const password = "hello";
+const checkGeneratePassword = checkGenerate(password);
+console.log(checkGeneratePassword)
+
+{
+  error: true,
+  message: 'It did not pass validations: uppercase, number, character, length.',
+  recommendedPassword: 'Hello4*.'
+}
+
+const password = "Hello4*.";
+const checkGeneratePassword = checkGenerate(password);
+console.log(checkGeneratePassword)
+
+{ 
+    error: false, 
+    message: 'Password is strong.' 
+}
+
+```
 
 ## Contributing
 

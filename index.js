@@ -1,46 +1,60 @@
 function checkGenerate(password) {
-  const MIN_LENGTH = 6;
+
   const REQUIRED_CHARACTER_TYPES = {
     uppercase: true,
     lowercase: true,
     number: true,
-    special: true,
+    character: true,
+    length: true,
   };
 
-  let missingCharacterTypes = [];
-  let recommendStrongPassword;
+  const characterTypeRegex = {
+    uppercase: /[A-Z]/,
+    lowercase: /[a-z]/,
+    number: /[0-9]/,
+    character: /[^A-Za-z0-9]/,
+    length: /^.{8,}$/,
+  };
 
-  if (password.length < MIN_LENGTH) {
-    return "Password should be at least " + MIN_LENGTH + " characters long.";
-  }
+  const missingCharacterTypes = Object.keys(REQUIRED_CHARACTER_TYPES)
+    .filter(
+      (type) =>
+        REQUIRED_CHARACTER_TYPES[type] &&
+        !characterTypeRegex[type].test(password)
+    )
+    .map((type) => type);
 
-  const symbols = ['$', '@', '!', '#', '%', '&', '*']; 
-  const randomIndex = Math.floor(Math.random() * symbols.length);
-  const randomNumber = Math.floor(Math.random() * 10); 
-
-  if (REQUIRED_CHARACTER_TYPES.uppercase && !/[A-Z]/.test(password)) {
-    missingCharacterTypes.push("uppercase letters"); 
-  }
-
-  if (REQUIRED_CHARACTER_TYPES.lowercase && !/[a-z]/.test(password)) {
-    missingCharacterTypes.push("lowercase letters");
-  }
-
-  if (REQUIRED_CHARACTER_TYPES.number && !/[0-9]/.test(password)) {
-    missingCharacterTypes.push("numbers");
-  }
-
-  if (REQUIRED_CHARACTER_TYPES.special && !/[^A-Za-z0-9]/.test(password)) {
-    missingCharacterTypes.push("special characters");
-  }
-  
   if (missingCharacterTypes.length > 0) {
-    recommendStrongPassword = password.charAt(0).toUpperCase()+ password.slice(1).toLowerCase() + randomNumber + symbols[randomIndex];
-    return `Password should include ` + missingCharacterTypes.join(", ") + "." + 
-    `Recommended strong password:${recommendStrongPassword}`;
+    const randomCode = Math.floor(Math.random() * (47 - 33 + 1)) + 33;
+    const specialChar = String.fromCharCode(randomCode);
+    const randomSymbol = specialChar;
+    const randomDigit = Math.floor(Math.random() * 10);
+
+    let recommendStrongPassword = `${password.charAt(0).toUpperCase()}${password
+      .slice(1)
+      .toLowerCase()}${randomDigit}${randomSymbol}`;
+
+    const randomString = (Math.random() + 1)
+      .toString(36)
+      .substring(2, 8 - recommendStrongPassword.length)
+      .padEnd(8 - recommendStrongPassword.length, "0");
+
+    recommendStrongPassword =
+      recommendStrongPassword.length < 8
+        ? recommendStrongPassword + randomString
+        : recommendStrongPassword;
+
+    return {
+      error: true,
+      message: `It did not pass validations: ${missingCharacterTypes.join(", ")}.`,
+      recommendedPassword: recommendStrongPassword,
+    };
   }
 
-  return "Password is strong.";
+  return {
+    error: false,
+    message: "The password is strong.",
+  };
 }
 
 module.exports = checkGenerate;
