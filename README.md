@@ -19,6 +19,7 @@
 
 - Checking the strength of the password.
 - Generating a strong password.
+- A strong password is automatically generated if no password is passed as an argument.
 
 ## Installation
 
@@ -48,8 +49,15 @@ const checkGeneratePassword = checkGenerate(password);
 console.log(checkGeneratePassword)
 
 { 
-    error: false, 
-    message: 'Password is strong.' 
+  error: false, 
+  message: 'Password is strong.' 
+}
+
+const checkGeneratePassword = checkGenerate();
+console.log(checkGeneratePassword)
+
+{ 
+  generatedPassword: ')j4FrI0O(SKz' 
 }
 
 ```
