@@ -18,8 +18,8 @@
 ## Features
 
 - Checking the strength of the password.
-- Generating a strong password.
-- A strong password is automatically generated if no password is passed as an argument.
+- Setting a strong password similar to the password entered by the user.
+- Automatic generation of a strong password if no password is passed as an argument.
 
 ## Installation
 
